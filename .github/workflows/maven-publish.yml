@@ -18,13 +18,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 11
+    - name: Set up JDK 11 and publishing to GitHub Packages
       uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'temurin'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Set up Maven
       uses: stCarolas/setup-maven@v5
@@ -41,7 +39,7 @@ jobs:
       run: slice2java -Iice/slice MumbleServer.ice
 
     - name: Move files to correct structure
-      run: mkdir -p src/main/java/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/mumble-voip/mumble/server
+      run: mkdir -p src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server
 
     - name: Build package
       # Not ideal. hopefully I find better way later
@@ -55,3 +53,19 @@ jobs:
       run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11 and publishing to Maven Central
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+
+    - name: Publish to Maven Central
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
+      env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
