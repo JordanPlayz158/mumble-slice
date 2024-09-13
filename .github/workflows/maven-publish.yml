@@ -44,7 +44,8 @@ jobs:
       run: mkdir -p src/main/java/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/mumble-voip/mumble/server
 
     - name: Build package
-      run: mvn package
+      # Not ideal. hopefully I find better way later
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn package
 
     - uses: actions/upload-artifact@v4
       with:
