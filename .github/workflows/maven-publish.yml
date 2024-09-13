@@ -31,7 +31,7 @@ jobs:
       run: curl -s https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice -o MumbleServer.ice
 
     - name: Slice To Java
-      run: slice2java MumbleServer.ice
+      run: slice2java -I/usr/local/include/ MumbleServer.ice
 
     - uses: actions/upload-artifact@v4
       with:
