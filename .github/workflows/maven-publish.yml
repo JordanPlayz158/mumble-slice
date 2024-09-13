@@ -30,7 +30,6 @@ jobs:
     - name: Slice To Java
       run: slice2java MumbleServer.ice
 
-    - name: Save as artifact
     - uses: actions/upload-artifact@v4
       with:
         path: MumbleServer
