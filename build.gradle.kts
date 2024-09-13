@@ -6,6 +6,8 @@ plugins {
   id("org.jreleaser") version "1.14.0"
 }
 
+group = "xyz.jordanplayz158.mumble-voip.mumble"
+
 java {
   withJavadocJar()
   withSourcesJar()
@@ -14,7 +16,7 @@ java {
 publishing {
   publications {
     create<MavenPublication>("maven") {
-      groupId = "xyz.jordanplayz158.mumble-voip.mumble"
+      groupId = group.toString()
       artifactId = "server"
 
       from(components["java"])
