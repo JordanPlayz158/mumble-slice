@@ -52,6 +52,6 @@ jobs:
         path: target/*.jar
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
