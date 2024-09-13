@@ -49,7 +49,7 @@ publishing {
 
   repositories {
     maven {
-      url = URI(layout.buildDirectory.dir("staging-deploy").toString())
+      url = URI(layout.buildDirectory.dir("staging-deploy").get().toString())
     }
   }
 }
@@ -62,7 +62,7 @@ jreleaser {
   deploy {
     maven {
       nexus2 {
-        named("maven-central") {
+        create("maven-central") {
           setActive("ALWAYS")
           uri(URI("https://s01.oss.sonatype.org/service/local"))
           snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
