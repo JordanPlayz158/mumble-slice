@@ -28,7 +28,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Get Ice File
-      run: wget https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice
+      run: curl -s https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice -o MumbleServer.ice
 
     - name: Slice To Java
       run: slice2java MumbleServer.ice
