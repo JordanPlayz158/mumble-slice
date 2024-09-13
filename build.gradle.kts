@@ -1,8 +1,7 @@
 plugins {
   `java-library`
   `maven-publish`
-  jreleaser
-  #id("org.jreleaser") version "1.14.0"
+  id("org.jreleaser") version "1.14.0"
 }
 
 java {
@@ -29,8 +28,8 @@ publishing {
             url = "https://spdx.org/licenses/AGPL-3.0-or-later.html"
           }
         }
-        # This list is for maintainers of the mumble-slice
-        #   not the list of developers for the mumble project
+        // This list is for maintainers of the mumble-slice
+        //   not the list of developers for the mumble project
         developers {
           developer {
             id = "jordanplayz158"
