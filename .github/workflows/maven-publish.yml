@@ -56,7 +56,7 @@ jobs:
         path: target/*.jar
 
     - name: Publish to Maven Central
-      run: './gradlew jreleaserConfig && ./gradlew clean && ./gradlew publish && ./gradlew jreleaserFullRelease'
+      run: "./gradlew jreleaserConfig && ./gradlew clean && ./gradlew publish && ./gradlew jreleaserFullRelease"
       env:
 #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
