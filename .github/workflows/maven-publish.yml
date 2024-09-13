@@ -17,22 +17,6 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 11 and publishing to Maven Central
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        server-id: central
-        server-username: MAVEN_USERNAME
-        server-password: MAVEN_PASSWORD
-        cache: maven
-
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v5
-      with:
-        maven-version: 3.8.2
-
     - name: Get Ice File
       run: curl -s https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice -o MumbleServer.ice
 
@@ -45,18 +29,34 @@ jobs:
     - name: Move files to correct structure
       run: mkdir -p src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server
 
-    - name: Set correct maven version
-      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn versions:set -DnewVersion="$GITHUB_TAG"
+#    - name: Set correct maven version
+#      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn versions:set -DnewVersion="$GITHUB_TAG"
+
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11 and publishing to Maven Central
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+#        server-id: oss.sonatype.org
+#        server-username: MAVEN_USERNAME
+#        server-password: MAVEN_PASSWORD
+        cache: gradle
+
+#    - name: Set up Maven
+#      uses: stCarolas/setup-maven@v5
+#      with:
+#        maven-version: 3.8.2
 
     - name: Build package
-      run: mvn package
+      run: ./gradlew build
 
     - uses: actions/upload-artifact@v4
       with:
         path: target/*.jar
 
     - name: Publish to Maven Central
-      run: mvn --batch-mode deploy
+      run: ./gradlew jreleaserConfig && ./gradlew clean && ./gradlew publish && ./gradlew jreleaserFullRelease
       env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
