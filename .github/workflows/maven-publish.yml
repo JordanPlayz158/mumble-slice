@@ -4,8 +4,10 @@
 name: Maven Publish
 
 on:
-  release:
-    types: [created]
+# Uncomment once works
+#  release:
+#    types: [created]
+  push
 
 jobs:
   build:
