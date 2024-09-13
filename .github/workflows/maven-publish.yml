@@ -11,7 +11,8 @@ on:
 
 jobs:
   build:
-    runs-on: ghcr.io/jordanplayz158/zeroc-docker-image:latest
+    runs-on: ubuntu-latest
+    container: ghcr.io/jordanplayz158/zeroc-docker-image:latest
     permissions:
       contents: read
       packages: write
