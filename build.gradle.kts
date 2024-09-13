@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
   `java-library`
   `maven-publish`
@@ -11,7 +13,7 @@ java {
 
 publishing {
   publications {
-    maven {
+    named<MavenPublication>("maven") {
       groupId = "xyz.jordanplayz158.mumble-voip.mumble"
       artifactId = "server"
 
@@ -47,22 +49,22 @@ publishing {
 
   repositories {
     maven {
-      url = layout.buildDirectory.dir("staging-deploy")
+      url = URI(layout.buildDirectory.dir("staging-deploy").toString())
     }
   }
 }
 
 jreleaser {
   signing {
-    active = "ALWAYS"
+    setActive("ALWAYS")
     armored = true
   }
   deploy {
     maven {
       nexus2 {
-        `maven-central` {
-          active = "ALWAYS"
-          url = "https://s01.oss.sonatype.org/service/local"
+        named("maven-central") {
+          setActive("ALWAYS")
+          uri(URI("https://s01.oss.sonatype.org/service/local"))
           snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
           closeRepository = true
           releaseRepository = false
