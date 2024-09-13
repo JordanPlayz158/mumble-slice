@@ -41,6 +41,9 @@ jobs:
     - name: Slice To Java
       run: slice2java -Iice/slice MumbleServer.ice
 
+    - name: Move files to correct structure
+      run: mkdir -p src/main/java/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/mumble-voip/mumble/server
+
     - name: Build package
       run: mvn package
 
