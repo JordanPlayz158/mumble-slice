@@ -42,11 +42,11 @@ jobs:
       run: slice2java -Iice/slice MumbleServer.ice
 
     - name: Build package
-      run: mvn build
+      run: mvn package
 
     - uses: actions/upload-artifact@v4
       with:
-        path: MumbleServer
+        path: target
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
