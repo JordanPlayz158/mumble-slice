@@ -5,7 +5,6 @@ name: Maven Publish
 
 on:
   push:
-    branches: [ "master" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
 
@@ -52,7 +51,6 @@ jobs:
         path: target/*.jar
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        GITHUB_TAG: ${GITHUB_REF#refs/*/v}
