@@ -24,6 +24,17 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Get Ice File
+      run: wget https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice
+
+    - name: Slice To Java
+      run: slice2java MumbleServer.ice
+
+    - name: Save as artifact
+    - uses: actions/upload-artifact@v4
+      with:
+        path: MumbleServer
+
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
