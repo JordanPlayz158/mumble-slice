@@ -15,7 +15,7 @@ publishing {
       groupId = "xyz.jordanplayz158.mumble-voip.mumble"
       artifactId = "server"
 
-      from components.java
+      from(components["java"])
 
       pom {
         name = "server"
