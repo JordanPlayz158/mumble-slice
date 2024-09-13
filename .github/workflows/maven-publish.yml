@@ -53,3 +53,4 @@ jobs:
       run: mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TAG: ${GITHUB_REF#refs/*/}

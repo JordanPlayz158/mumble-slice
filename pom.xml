@@ -5,7 +5,7 @@
 
     <groupId>mumble-voip.mumble</groupId>
     <artifactId>server</artifactId>
-    <version>Should be supplied by maven plugin</version>
+    <version>${env.GITHUB_TAG}</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,17 +22,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>me.ccampo</groupId>
-                <artifactId>git-version-maven-plugin</artifactId>
-                <version>0.1.0</version> <!-- Use the latest stable version if possible -->
-                <extensions>true</extensions>
-                <configuration>
-                    <strategy hint="git">
-                        <!-- Strategy specific configuration goes here -->
-                    </strategy>
                 </configuration>
             </plugin>
         </plugins>
