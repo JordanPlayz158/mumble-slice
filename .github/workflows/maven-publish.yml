@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/jordanplayz158/zeroc-docker-image:latest
+    container: ghcr.io/jordanplayz158/zeroc-docker-image:v3.7.10
     permissions:
       contents: read
       packages: write
@@ -30,8 +30,11 @@ jobs:
     - name: Get Ice File
       run: curl -s https://raw.githubusercontent.com/mumble-voip/mumble/${GITHUB_REF#refs/*/}/src/murmur/MumbleServer.ice -o MumbleServer.ice
 
+    - name: Get Slice Libraries? (Not sure what to call them but SliceChecksumDict.ice is required)
+      run: git clone --no-checkout https://github.com/zeroc-ice/ice && cd ice && git sparse-checkout init && git sparse-checkout set slice && git checkout v3.7.10
+
     - name: Slice To Java
-      run: slice2java -I/usr/local/include/ MumbleServer.ice
+      run: slice2java -Iice/slice MumbleServer.ice
 
     - uses: actions/upload-artifact@v4
       with:
