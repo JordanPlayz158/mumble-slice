@@ -5,6 +5,7 @@
 
     <groupId>mumble-voip.mumble</groupId>
     <artifactId>server</artifactId>
+    <version>Should be supplied by maven plugin</version>
     <packaging>jar</packaging>
 
     <properties>
