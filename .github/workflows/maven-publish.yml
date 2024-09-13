@@ -33,7 +33,7 @@ jobs:
 #      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn versions:set -DnewVersion="$GITHUB_TAG"
 
     - uses: actions/checkout@v4
-    - name: Set up JDK 11 and publishing to Maven Central
+    - name: Set up JDK 8 and publishing to Maven Central
       uses: actions/setup-java@v4
       with:
         java-version: '8'

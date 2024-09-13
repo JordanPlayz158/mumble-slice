@@ -11,7 +11,7 @@ java {
 
 publishing {
   publications {
-    maven(MavenPublication) {
+    maven {
       groupId = "xyz.jordanplayz158.mumble-voip.mumble"
       artifactId = "server"
 
