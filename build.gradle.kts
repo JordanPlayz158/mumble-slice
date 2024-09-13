@@ -1,6 +1,6 @@
 plugins {
-  java-library
-  maven-publish
+  `java-library`
+  `maven-publish`
   jreleaser
   #id("org.jreleaser") version "1.14.0"
 }
