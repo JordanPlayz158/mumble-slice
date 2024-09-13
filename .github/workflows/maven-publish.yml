@@ -23,6 +23,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
+        cache: maven
 
     - name: Set up Maven
       uses: stCarolas/setup-maven@v5
@@ -50,7 +51,7 @@ jobs:
         path: target/*.jar
 
     - name: Publish to GitHub Packages Apache Maven
-      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn --batch-mode deploy
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
@@ -63,6 +64,7 @@ jobs:
         server-id: ossrh
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
+        cache: maven
 
     - name: Publish to Maven Central
       run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn --batch-mode deploy
