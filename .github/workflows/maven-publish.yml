@@ -50,7 +50,7 @@ jobs:
         path: target/*.jar
 
     - name: Publish to GitHub Packages Apache Maven
-      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn --batch-mode deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
@@ -65,7 +65,7 @@ jobs:
         server-password: MAVEN_PASSWORD
 
     - name: Publish to Maven Central
-      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn -s $GITHUB_WORKSPACE/settings.xml --batch-mode deploy
+      run: export GITHUB_TAG=${GITHUB_REF#refs/*/v} && mvn --batch-mode deploy
       env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
