@@ -41,8 +41,8 @@ jobs:
     - name: Slice To Java
       run: slice2java -Iice/slice MumbleServer.ice
 
-    - name: Compile .java files
-      run: javac MumbleServer/*.java
+    - name: Build package
+      run: mvn build
 
     - uses: actions/upload-artifact@v4
       with:
