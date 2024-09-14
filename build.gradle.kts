@@ -64,12 +64,6 @@ jreleaser {
     setActive("ALWAYS")
     armored = true
   }
-  checksum {
-    algorithm("MD5")
-    algorithm("SHA1")
-    algorithm("SHA-256")
-    algorithm("SHA-512")
-  }
 
   deploy {
     maven {
@@ -79,7 +73,7 @@ jreleaser {
           url = "https://s01.oss.sonatype.org/service/local"
           snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
           closeRepository = true
-          releaseRepository = false
+          releaseRepository = true
           stagingRepository("build/staging-deploy")
         }
       }
