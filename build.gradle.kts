@@ -69,7 +69,7 @@ jreleaser {
       nexus2 {
         create("maven-central") {
           setActive("ALWAYS")
-          uri(URI("https://s01.oss.sonatype.org/service/local"))
+          url = "https://s01.oss.sonatype.org/service/local"
           snapshotUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
           closeRepository = true
           releaseRepository = false
