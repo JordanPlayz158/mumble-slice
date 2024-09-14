@@ -54,7 +54,7 @@ publishing {
 
   repositories {
     maven {
-      url = URI(layout.buildDirectory.dir("staging-deploy").get().toString())
+      setUrl(layout.buildDirectory.dir("staging-deploy"))
     }
   }
 }
