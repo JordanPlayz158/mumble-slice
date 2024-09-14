@@ -64,6 +64,13 @@ jreleaser {
     setActive("ALWAYS")
     armored = true
   }
+  checksum {
+    algorithm("MD5")
+    algorithm("SHA1")
+    algorithm("SHA-256")
+    algorithm("SHA-512")
+  }
+
   deploy {
     maven {
       nexus2 {
