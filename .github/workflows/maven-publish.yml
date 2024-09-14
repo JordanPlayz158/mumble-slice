@@ -29,9 +29,6 @@ jobs:
     - name: Move files to correct structure
       run: mkdir -p src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server && cp MumbleServer/* src/main/java/xyz/jordanplayz158/mumble-voip/mumble/server
 
-    - name: Add version to gradle.properties
-      run: echo "githubVersion=${GITHUB_REF#refs/*/v}" > gradle.properties
-
     - uses: actions/checkout@v4
     - name: Set up JDK 8 and publishing to Maven Central
       uses: actions/setup-java@v4
@@ -42,6 +39,9 @@ jobs:
 #        server-username: MAVEN_USERNAME
 #        server-password: MAVEN_PASSWORD
         cache: gradle
+
+    - name: Add version to gradle.properties
+      run: echo "githubVersion=${GITHUB_REF#refs/*/v}" > gradle.properties
 
     - name: Build package
       run: ./gradlew build
