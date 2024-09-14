@@ -1,5 +1,7 @@
 import java.net.URI
 
+val githubVersion: String by project
+
 plugins {
   `java-library`
   `maven-publish`
@@ -7,6 +9,7 @@ plugins {
 }
 
 group = "xyz.jordanplayz158.mumble-voip.mumble"
+version = githubVersion
 
 java {
   withJavadocJar()
